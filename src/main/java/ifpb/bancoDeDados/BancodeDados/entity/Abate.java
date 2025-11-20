@@ -1,5 +1,5 @@
 package ifpb.bancoDeDados.BancodeDados.entity;
-
+import lombok.Builder;
 import jakarta.persistence.*;
 import lombok.*;
 
