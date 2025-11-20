@@ -28,19 +28,24 @@ public class AbateService {
     }
 
     @Transactional
-    public void salvarAbate(int ano, int mes, String siglaUF, String nomeMunicipio, String categoriaNome, long quantidade) {
-        UF uf = ufService.findOrCreate(siglaUF);
-        Municipio municipio = municipioService.findOrCreate(nomeMunicipio, uf);
-        CategoriaAnimal categoria = categoriaService.findOrCreate(categoriaNome);
+        public void salvarAbate(int ano, int mes, String siglaUF, String nomeMunicipio, String categoriaNome, long quantidade) {
+            UF uf = ufService.findOrCreate(siglaUF);
+            Municipio municipio = municipioService.findOrCreate(nomeMunicipio, uf);
+            CategoriaAnimal categoria = categoriaService.findOrCreate(categoriaNome);
 
-        Abate abate = Abate.builder()
-                .ano(ano)
-                .mes(mes)
-                .quantidade(quantidade)
-                .municipio(municipio)
-                .categoriaAnimal(categoria)
-                .build();
-        abateRepo.save(abate);
+            if(abateRepo.findByAnoAndMesAndMunicipioAndCategoriaAnimal(ano, mes, municipio, categoria).isEmpty()) {
+                Abate abate = Abate.builder()
+                        .ano(ano)
+                        .mes(mes)
+                        .quantidade(quantidade)
+                        .municipio(municipio)
+                        .categoriaAnimal(categoria)
+                        .build();
+                abateRepo.save(abate);
+            }
+            else{
+                System.out.println("Abate Ja Cadastrado");
+            }
 
     }
 }

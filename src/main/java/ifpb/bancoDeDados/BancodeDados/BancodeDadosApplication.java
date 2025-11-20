@@ -20,6 +20,6 @@ public class BancodeDadosApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//csvImportService.importarCsv("C:/Users/08001/Projetos/BancodeDados/src/main/resources/sigsifquantitativoanimaisabatidoscategoriauf.csv");
+		csvImportService.importarCsv("C:/Users/08001/Projetos/BancodeDados/src/main/resources/sigsifquantitativoanimaisabatidoscategoriauf.csv");
 	}
 }
