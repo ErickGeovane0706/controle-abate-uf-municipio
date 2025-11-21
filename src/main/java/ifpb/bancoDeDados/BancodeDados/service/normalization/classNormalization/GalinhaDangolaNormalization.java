@@ -1,16 +1,20 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class GalinhaDangolaNormalization {
-    private GalinhaDangolaNormalization() {}
-    public static Map<String,String> getMap(){
-        return Collections.unmodifiableMap(new HashMap<>(){{
-            put("galinha dangola","Galinha-d'angola");
-            put("galinha-d'angola","Galinha-d'angola");
-            put("galinha de água","Galinha-d'angola");
-        }});
+import static java.util.Map.entry;
+
+public final class GalinhaDangolaNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("galinha dangola", "Galinha-d'angola"),
+            entry("galinha-d'angola", "Galinha-d'angola"),
+            entry("galinha de água", "Galinha-d'angola")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

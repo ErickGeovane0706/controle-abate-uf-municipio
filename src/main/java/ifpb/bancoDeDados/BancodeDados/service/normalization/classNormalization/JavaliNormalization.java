@@ -1,17 +1,21 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class JavaliNormalization {
-    private JavaliNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("javali","Javali");
-        m.put("javali femea","Javali");
-        m.put("javali fêmea","Javali");
-        m.put("javali macho","Javali");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class JavaliNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("javali", "Javali"),
+            entry("javali femea", "Javali"),
+            entry("javali fêmea", "Javali"),
+            entry("javali macho", "Javali")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

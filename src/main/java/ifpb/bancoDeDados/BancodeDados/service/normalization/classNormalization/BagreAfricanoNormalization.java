@@ -1,15 +1,17 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class BagreAfricanoNormalization {
-    private BagreAfricanoNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("bagre africano", "Bagre africano");
-        m.put("bagre", "Bagre africano");
-        return Collections.unmodifiableMap(m);
+public final class BagreAfricanoNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.of(
+            "bagre africano", "Bagre africano",
+            "bagre", "Bagre africano"
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

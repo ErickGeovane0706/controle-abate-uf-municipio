@@ -1,15 +1,19 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class GalinhaPosturaNormalization {
-    private GalinhaPosturaNormalization() {}
-    public static Map<String,String> getMap(){
-        return Collections.unmodifiableMap(new HashMap<>(){{
-            put("galinha de postura","Galinha De Postura");
-            put("galinha de postura ","Galinha De Postura");
-        }});
+import static java.util.Map.entry;
+
+public final class GalinhaPosturaNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("galinha de postura", "Galinha De Postura"),
+            entry("galinha de postura ", "Galinha De Postura")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

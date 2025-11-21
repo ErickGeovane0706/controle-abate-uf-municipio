@@ -1,18 +1,22 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class TilapiaNormalization {
-    private TilapiaNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("tilapia","Tilápia");
-        m.put("tilápia","Tilápia");
-        m.put("tilápia do nilo","Tilápia");
-        m.put("tilápia-do-nilo","Tilápia");
-        m.put("tilápia, tilápia-do-nilo","Tilápia");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class TilapiaNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("tilapia", "Tilápia"),
+            entry("tilápia", "Tilápia"),
+            entry("tilápia do nilo", "Tilápia"),
+            entry("tilápia-do-nilo", "Tilápia"),
+            entry("tilápia, tilápia-do-nilo", "Tilápia")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

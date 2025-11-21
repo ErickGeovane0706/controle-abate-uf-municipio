@@ -1,16 +1,20 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class TrutaNormalization {
-    private TrutaNormalization() {}
-    public static Map<String,String> getMap(){
-        return Collections.unmodifiableMap(new HashMap<>(){{
-            put("truta","Truta");
-            put("truta-arco-íris","Truta");
-            put("truta arco-iris","Truta");
-        }});
+import static java.util.Map.entry;
+
+public final class TrutaNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("truta", "Truta"),
+            entry("truta-arco-íris", "Truta"),
+            entry("truta arco-iris", "Truta")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

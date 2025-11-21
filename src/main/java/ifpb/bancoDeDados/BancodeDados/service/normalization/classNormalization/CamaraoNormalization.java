@@ -1,15 +1,19 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class CamaraoNormalization {
-    private CamaraoNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("camarao", "Camarão");
-        m.put("camarão", "Camarão");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class CamaraoNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("camarao", "Camarão"),
+            entry("camarão", "Camarão")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

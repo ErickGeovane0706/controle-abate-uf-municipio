@@ -1,18 +1,22 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class CaprinoNormalization {
-    private CaprinoNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("caprino femea", "Caprino");
-        m.put("caprino fêmea", "Caprino");
-        m.put("caprino macho", "Caprino");
-        m.put("cabrita", "Caprino");
-        m.put("cabrito", "Caprino");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class CaprinoNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("caprino femea", "Caprino"),
+            entry("caprino fêmea", "Caprino"),
+            entry("caprino macho", "Caprino"),
+            entry("cabrita", "Caprino"),
+            entry("cabrito", "Caprino")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

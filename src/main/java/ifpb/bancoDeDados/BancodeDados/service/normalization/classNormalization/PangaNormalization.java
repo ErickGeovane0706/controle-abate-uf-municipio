@@ -1,15 +1,19 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class PangaNormalization {
-    private PangaNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("panga","Panga");
-        m.put("pangasius","Panga");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class PangaNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("panga", "Panga"),
+            entry("pangasius", "Panga")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

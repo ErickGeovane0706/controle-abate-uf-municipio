@@ -1,16 +1,20 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class JacareNormalization {
-    private JacareNormalization() {}
-    public static Map<String,String> getMap(){
-        Map<String,String> m = new HashMap<>();
-        m.put("jacare","Jacaré");
-        m.put("jacaré do pantanal","Jacaré");
-        m.put("jacaré-do-papo-amarelo","Jacaré");
-        return Collections.unmodifiableMap(m);
+import static java.util.Map.entry;
+
+public final class JacareNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("jacare", "Jacaré"),
+            entry("jacaré do pantanal", "Jacaré"),
+            entry("jacaré-do-papo-amarelo", "Jacaré")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

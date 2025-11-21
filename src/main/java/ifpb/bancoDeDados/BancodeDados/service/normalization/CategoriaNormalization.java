@@ -1,10 +1,9 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization;
 
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.ServiceLoader;
 
 public final class CategoriaNormalization {
 
@@ -13,32 +12,12 @@ public final class CategoriaNormalization {
     static {
         Map<String, String> temp = new HashMap<>();
 
-        // Pacote onde estão TODAS as classes de normalização
-        String basePackage = "ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization";
-
-        try {
-            // Carrega todas as classes do pacote base
-            Set<Class<?>> normalizationClasses = PackageScanner.getClasses(basePackage);
-
-            for (Class<?> clazz : normalizationClasses) {
-                try {
-                    // Procura método estático "getMap()"
-                    Method method = clazz.getMethod("getMap");
-
-                    // Chama método
-                    Map<String, String> map = (Map<String, String>) method.invoke(null);
-
-                    if (map != null) {
-                        temp.putAll(map);
-                    }
-
-                } catch (NoSuchMethodException ignored) {
-                    // A classe não possui getMap(), então ignora
-                }
+        ServiceLoader<CategoriaNormalizerProvider> loader = ServiceLoader.load(CategoriaNormalizerProvider.class);
+        for (CategoriaNormalizerProvider provider : loader) {
+            Map<String, String> map = provider.getMap();
+            if (map != null) {
+                temp.putAll(map);
             }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao carregar normalizações automaticamente", e);
         }
 
         NORMALIZED_MAP = Collections.unmodifiableMap(temp);

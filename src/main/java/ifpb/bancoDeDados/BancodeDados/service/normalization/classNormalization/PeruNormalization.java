@@ -1,14 +1,18 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class PeruNormalization {
-    private PeruNormalization() {}
-    public static Map<String,String> getMap(){
-        return Collections.unmodifiableMap(new HashMap<>(){{
-            put("peru","Peru");
-        }});
+import static java.util.Map.entry;
+
+public final class PeruNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("peru", "Peru")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }

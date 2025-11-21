@@ -1,14 +1,18 @@
 package ifpb.bancoDeDados.BancodeDados.service.normalization.classNormalization;
 
-import java.util.Collections;
-import java.util.HashMap;
+import ifpb.bancoDeDados.BancodeDados.service.normalization.CategoriaNormalizerProvider;
 import java.util.Map;
 
-public final class GansoNormalization {
-    private GansoNormalization() {}
-    public static Map<String,String> getMap(){
-        return Collections.unmodifiableMap(new HashMap<>(){{
-            put("ganso","Ganso");
-        }});
+import static java.util.Map.entry;
+
+public final class GansoNormalization implements CategoriaNormalizerProvider {
+
+    private static final Map<String,String> MAP = Map.ofEntries(
+            entry("ganso", "Ganso")
+    );
+
+    @Override
+    public Map<String, String> getMap() {
+        return MAP;
     }
 }
