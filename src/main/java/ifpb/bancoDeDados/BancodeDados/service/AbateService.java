@@ -9,6 +9,8 @@ import ifpb.bancoDeDados.BancodeDados.repository.AbateRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AbateService {
 
@@ -29,11 +31,16 @@ public class AbateService {
 
     @Transactional
     public void salvarAbate(int ano, int mes, String siglaUF, String nomeMunicipio, String categoriaNome, long quantidade) {
+
         UF uf = ufService.findOrCreate(siglaUF);
         Municipio municipio = municipioService.findOrCreate(nomeMunicipio, uf);
         CategoriaAnimal categoria = categoriaService.findOrCreate(categoriaNome);
 
-        if(abateRepo.findByAnoAndMesAndMunicipioAndCategoriaAnimal(ano, mes, municipio, categoria).isEmpty()) {
+        boolean existe = !abateRepo
+                .findByAnoAndMesAndMunicipioAndCategoriaAnimal(ano, mes, municipio, categoria)
+                .isEmpty();
+
+        if (!existe) {
             Abate abate = Abate.builder()
                     .ano(ano)
                     .mes(mes)
@@ -41,12 +48,36 @@ public class AbateService {
                     .municipio(municipio)
                     .categoriaAnimal(categoria)
                     .build();
-            abateRepo.save(abate);
-        }
-        else{
-            System.out.println("Abate Ja Cadastrado");
-        }
 
+            abateRepo.save(abate);
+        } else {
+            System.out.println("⚠ Abate já cadastrado!");
+        }
+    }
+
+    public List<Abate> listarTodos() {
+        return abateRepo.findAll();
+    }
+
+    public List<Abate> buscarPorAno(int ano) {
+        return abateRepo.findByAno(ano);
+    }
+
+    public List<Abate> buscarPorAnoMes(int ano, int mes) {
+        return abateRepo.findByAnoAndMes(ano, mes);
+    }
+
+    public List<Abate> buscarPorUf(String uf) {
+        return abateRepo.findByMunicipio_Uf_Sigla(uf);
+    }
+
+    public List<Abate> buscarPorMunicipio(String municipio) {
+        return abateRepo.findByMunicipio_Nome(municipio);
+    }
+
+    public List<Abate> buscarPorCategoria(String categoria) {
+        return abateRepo.findByCategoriaAnimal_Nome(categoria);
     }
 }
+
 
