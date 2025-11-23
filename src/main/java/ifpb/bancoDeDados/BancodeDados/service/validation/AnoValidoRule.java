@@ -1,6 +1,5 @@
 package ifpb.bancoDeDados.BancodeDados.service.validation;
 
-import ifpb.bancoDeDados.BancodeDados.service.validation.ValidationRule;
 
 public class AnoValidoRule implements ValidationRule {
     @Override

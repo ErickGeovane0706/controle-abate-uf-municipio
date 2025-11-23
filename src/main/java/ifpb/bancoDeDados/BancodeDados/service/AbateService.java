@@ -1,6 +1,5 @@
 package ifpb.bancoDeDados.BancodeDados.service;
 
-
 import ifpb.bancoDeDados.BancodeDados.entity.Abate;
 import ifpb.bancoDeDados.BancodeDados.entity.CategoriaAnimal;
 import ifpb.bancoDeDados.BancodeDados.entity.Municipio;
@@ -9,6 +8,7 @@ import ifpb.bancoDeDados.BancodeDados.repository.AbateRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @Service
@@ -18,20 +18,24 @@ public class AbateService {
     private final MunicipioService municipioService;
     private final CategoriaAnimalService categoriaService;
     private final AbateRepository abateRepo;
+    private final DataSource dataSource;   // ******* AQUI ********
 
     public AbateService(UFService ufService,
                         MunicipioService municipioService,
                         CategoriaAnimalService categoriaService,
-                        AbateRepository abateRepo) {
+                        AbateRepository abateRepo,
+                        DataSource dataSource) {   // ******* AQUI ********
         this.ufService = ufService;
         this.municipioService = municipioService;
         this.categoriaService = categoriaService;
         this.abateRepo = abateRepo;
+        this.dataSource = dataSource;      // ******* AQUI ********
     }
 
+
+    //Inserir csv com Hibernate (SEM MUDANÇAS)
     @Transactional
     public void salvarAbate(int ano, int mes, String siglaUF, String nomeMunicipio, String categoriaNome, long quantidade) {
-
         UF uf = ufService.findOrCreate(siglaUF);
         Municipio municipio = municipioService.findOrCreate(nomeMunicipio, uf);
         CategoriaAnimal categoria = categoriaService.findOrCreate(categoriaNome);
@@ -55,6 +59,7 @@ public class AbateService {
         }
     }
 
+    // Métodos de leitura
     public List<Abate> listarTodos() {
         return abateRepo.findAll();
     }
@@ -79,5 +84,3 @@ public class AbateService {
         return abateRepo.findByCategoriaAnimal_Nome(categoria);
     }
 }
-
-
