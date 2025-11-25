@@ -4,8 +4,10 @@ import ifpb.bancoDeDados.BancodeDados.entity.Abate;
 import ifpb.bancoDeDados.BancodeDados.entity.CategoriaAnimal;
 import ifpb.bancoDeDados.BancodeDados.entity.Municipio;
 import ifpb.bancoDeDados.BancodeDados.entity.UF;
+import ifpb.bancoDeDados.BancodeDados.record.*;
 import ifpb.bancoDeDados.BancodeDados.repository.AbateRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -83,4 +85,24 @@ public class AbateService {
     public List<Abate> buscarPorCategoria(String categoria) {
         return abateRepo.findByCategoriaAnimal_Nome(categoria);
     }
+    public List<SomaPorUfRecord> somarPorUf() {
+        return abateRepo.somarPorUf();
+    }
+    public List<SomaPorMunicipioRecord> somarPorMunicipio() {
+        return abateRepo.somarPorMunicipio();
+    }
+    public List<SomaPorCategoriaRecord> somarPorCategoria() {
+        return abateRepo.somarPorCategoria();
+    }
+    public List<SomaPorAnoRecord> somarPorAno() {
+        return abateRepo.somarPorAno();
+    }
+    public SomaFiltradaRecord somaFiltrada(String uf, String categoria, Integer ano, Integer mes) {
+        return abateRepo.somaFiltrada(uf, categoria, ano, mes);
+    }
+
+
+
+
+
 }
