@@ -55,10 +55,6 @@ src/
 ├── ValidationRule.java
 ├── ValidationConfig.java
 └── ValidatorEngine.java
-
-markdown
-Copiar código
-
 ---
 
 # 🧩 **Funcionalidades Principais**
@@ -96,10 +92,6 @@ Copiar código
 
 ## 🔹 **Listar todos os abates**
 GET /api/abates
-
-yaml
-Copiar código
-
 ---
 
 ## 🔹 **Consultas Básicas**
@@ -107,20 +99,11 @@ Copiar código
 ### Buscar por ano
 GET /api/abates/ano/{ano}
 
-shell
-Copiar código
-
 ### Buscar por ano e mês
 GET /api/abates/ano/{ano}/mes/{mes}
 
-shell
-Copiar código
-
 ### Buscar por UF
 GET /api/abates/uf/{uf}
-
-shell
-Copiar código
 
 ### Buscar por município
 GET /api/abates/municipio/{municipio}
@@ -130,10 +113,6 @@ Copiar código
 
 ### Buscar por categoria
 GET /api/abates/categoria/{categoria}
-
-yaml
-Copiar código
-
 ---
 
 # 📊 Consultas Agregadas
@@ -172,7 +151,6 @@ Exemplo:
 GET /api/abates/soma-filtrada?uf=PB&categoria=Bovino&ano=2020
 Retorno:
 json
-Copiar código
 { "total": 812 }
 📥 Importação de CSV via JDBC (Ultra Rápida)
 O serviço CsvImportJdbcService realiza:
