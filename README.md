@@ -18,7 +18,7 @@ Ele combina **JPA/Hibernate**, **JDBC otimizado com batch**, **normalização**,
 
 
 ## 📁 Estrutura do Projeto
-
+---
 src/
 └── main/
     └── java/
