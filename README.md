@@ -21,40 +21,43 @@ Ele combina **JPA/Hibernate**, **JDBC otimizado com batch**, **normalização**,
 ## 📁 Estrutura do Projeto
 
 src/
-└── main/java/ifpb/bancoDeDados/BancodeDados
-├── controller/
-│ └── AbateController.java
-├── entity/
-│ ├── Abate.java
-│ ├── CategoriaAnimal.java
-│ ├── Municipio.java
-│ └── UF.java
-├── record/
-│ ├── SomaPorUfRecord.java
-│ ├── SomaPorAnoRecord.java
-│ ├── SomaPorCategoriaRecord.java
-│ ├── SomaPorMunicipioRecord.java
-│ └── SomaFiltradaRecord.java
-├── repository/
-│ ├── AbateRepository.java
-│ ├── CategoriaAnimalRepository.java
-│ ├── MunicipioRepository.java
-│ ├── UFRepository.java
-│ └── JDBC/AbateJdbcRepository.java
-├── service/
-│ ├── AbateService.java
-│ ├── CategoriaAnimalService.java
-│ ├── MunicipioService.java
-│ ├── UFService.java
-│ └── CsvImportJdbcService.java
-└── service/validation/
-├── AnoValidoRule.java
-├── MesValidoRule.java
-├── UfValidaRule.java
-├── QuantidadeValidaRule.java
-├── ValidationRule.java
-├── ValidationConfig.java
-└── ValidatorEngine.java
+└── main/
+    └── java/
+        └── ifpb/bancoDeDados/BancodeDados
+            ├── controller/
+            │   └── AbateController.java
+            ├── entity/
+            │   ├── Abate.java
+            │   ├── CategoriaAnimal.java
+            │   ├── Municipio.java
+            │   └── UF.java
+            ├── record/
+            │   ├── SomaPorUfRecord.java
+            │   ├── SomaPorAnoRecord.java
+            │   ├── SomaPorCategoriaRecord.java
+            │   ├── SomaPorMunicipioRecord.java
+            │   └── SomaFiltradaRecord.java
+            ├── repository/
+            │   ├── AbateRepository.java
+            │   ├── CategoriaAnimalRepository.java
+            │   ├── MunicipioRepository.java
+            │   ├── UFRepository.java
+            │   └── JDBC/AbateJdbcRepository.java
+            ├── service/
+            │   ├── AbateService.java
+            │   ├── CategoriaAnimalService.java
+            │   ├── MunicipioService.java
+            │   ├── UFService.java
+            │   └── CsvImportJdbcService.java
+            └── service/validation/
+                ├── AnoValidoRule.java
+                ├── MesValidoRule.java
+                ├── UfValidaRule.java
+                ├── QuantidadeValidaRule.java
+                ├── ValidationRule.java
+                ├── ValidationConfig.java
+                └── ValidatorEngine.java
+
 ---
 
 # 🧩 **Funcionalidades Principais**
