@@ -16,7 +16,6 @@ Ele combina **JPA/Hibernate**, **JDBC otimizado com batch**, **normalização**,
 - **PostgreSQL / MySQL** (compatível com qualquer SQL relacional)
 - **Padronização e Validação Customizada**
 
----
 
 ## 📁 Estrutura do Projeto
 
@@ -57,8 +56,6 @@ src/
                 ├── ValidationRule.java
                 ├── ValidationConfig.java
                 └── ValidatorEngine.java
-
----
 
 # 🧩 **Funcionalidades Principais**
 
