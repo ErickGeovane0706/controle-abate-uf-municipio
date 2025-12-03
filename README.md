@@ -57,6 +57,7 @@ src/
                 ├── ValidationConfig.java
                 └── ValidatorEngine.java
 
+
 # 🧩 **Funcionalidades Principais**
 
 ### ✔ Importação de CSV via JDBC  
