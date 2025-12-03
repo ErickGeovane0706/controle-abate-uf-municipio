@@ -150,20 +150,16 @@ Retorno:
   {"uf": "SP", "total": 9988}
 ]
 Soma por Município
-swift
-Copiar código
 GET /api/abates/soma/municipio
+
 Soma por Categoria
-swift
-Copiar código
 GET /api/abates/soma/categoria
+
 Soma por Ano
-swift
-Copiar código
 GET /api/abates/soma/ano
+
 🎯 Consulta Filtrada (qualquer combinação)
-bash
-Copiar código
+
 GET /api/abates/soma-filtrada
 Parâmetros opcionais:
 Parâmetro	Tipo	Exemplo
@@ -173,11 +169,8 @@ ano	Int	2020
 mes	Int	5
 
 Exemplo:
-bash
-Copiar código
 GET /api/abates/soma-filtrada?uf=PB&categoria=Bovino&ano=2020
 Retorno:
-
 json
 Copiar código
 { "total": 812 }
@@ -208,17 +201,13 @@ Quantidade ≥ 0	QuantidadeValidaRule
 As regras são aplicadas no ValidatorEngine.
 
 🗃 Modelo de Banco de Dados
-scss
-Copiar código
 UF (1) ---- (N) Municipio ---- (N) Abate ---- (1) CategoriaAnimal
+
 📌 Exemplo de Registro no CSV
-yaml
-Copiar código
 ano;mes;uf;municipio;categoria;quantidade
 2020;05;PB;Cajazeiras;Bovino;213
 🧑‍💻 Como Rodar o Projeto
-bash
-Copiar código
+
 # Clonar repositório
 git clone https://github.com/seuusuario/seu-repo.git
 
