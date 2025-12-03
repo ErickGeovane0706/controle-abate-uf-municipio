@@ -1,20 +1,229 @@
-# SpringBoot Abate de Animais
+# 🐄 Sistema de Gerenciamento de Abates — Spring Boot + JPA + JDBC Batch
 
-Projeto acadêmico desenvolvido em **Java Spring Boot** com **MariaDB**, voltado para a análise de dados de abate de animais por UF, município e categoria. Os dados são importados de arquivos CSV do **Ministério da Agricultura**.
-
----
-
-## 🔹 Tecnologias
-
-- Java 17/21  
-- Spring Boot 3.x  
-- Spring Data JPA  
-- MariaDB  
-- OpenCSV (para leitura e importação de CSV)  
-- Maven (gerenciamento de dependências)  
-- Lombok (opcional, para simplificação de código)
+Este projeto implementa um sistema completo para processamento, cadastro e consultas de dados de abates no Brasil.  
+Ele combina **JPA/Hibernate**, **JDBC otimizado com batch**, **normalização**, **validação robusta**, e **consultas agregadas** com projeções usando `Record`.
 
 ---
 
-## 🔹 Estrutura do Projeto
+## 🚀 Tecnologias Utilizadas
 
+- **Java 17+**
+- **Spring Boot**
+- **Spring Data JPA**
+- **Lombok**
+- **OpenCSV**
+- **JDBC Batch Processing**
+- **PostgreSQL / MySQL** (compatível com qualquer SQL relacional)
+- **Padronização e Validação Customizada**
+
+---
+
+## 📁 Estrutura do Projeto
+
+src/
+└── main/java/ifpb/bancoDeDados/BancodeDados
+├── controller/
+│ └── AbateController.java
+├── entity/
+│ ├── Abate.java
+│ ├── CategoriaAnimal.java
+│ ├── Municipio.java
+│ └── UF.java
+├── record/
+│ ├── SomaPorUfRecord.java
+│ ├── SomaPorAnoRecord.java
+│ ├── SomaPorCategoriaRecord.java
+│ ├── SomaPorMunicipioRecord.java
+│ └── SomaFiltradaRecord.java
+├── repository/
+│ ├── AbateRepository.java
+│ ├── CategoriaAnimalRepository.java
+│ ├── MunicipioRepository.java
+│ ├── UFRepository.java
+│ └── JDBC/AbateJdbcRepository.java
+├── service/
+│ ├── AbateService.java
+│ ├── CategoriaAnimalService.java
+│ ├── MunicipioService.java
+│ ├── UFService.java
+│ └── CsvImportJdbcService.java
+└── service/validation/
+├── AnoValidoRule.java
+├── MesValidoRule.java
+├── UfValidaRule.java
+├── QuantidadeValidaRule.java
+├── ValidationRule.java
+├── ValidationConfig.java
+└── ValidatorEngine.java
+
+markdown
+Copiar código
+
+---
+
+# 🧩 **Funcionalidades Principais**
+
+### ✔ Importação de CSV via JDBC  
+- Extremamente rápida  
+- Usa prepared statements + batch  
+- Validação linha a linha  
+- Normalização de categorias  
+- Cache para evitar SELECTs repetidos  
+
+### ✔ Cadastro automático de:
+- UF  
+- Município  
+- Categoria Animal  
+
+### ✔ Endpoints completos de consulta:
+- Consultas básicas  
+- Consultas agregadas com projeção (`Record`)  
+- Filtros combinados  
+
+### ✔ Validação completa:
+- Ano válido  
+- Mês válido  
+- UF válida  
+- Quantidade positiva  
+
+### ✔ Normalização flexível de categorias (plugin-like)
+- Baseada em `ServiceLoader`  
+- Permite múltiplos providers de forma extensível  
+
+---
+
+# 📡 Endpoints da API
+
+## 🔹 **Listar todos os abates**
+GET /api/abates
+
+yaml
+Copiar código
+
+---
+
+## 🔹 **Consultas Básicas**
+
+### Buscar por ano
+GET /api/abates/ano/{ano}
+
+shell
+Copiar código
+
+### Buscar por ano e mês
+GET /api/abates/ano/{ano}/mes/{mes}
+
+shell
+Copiar código
+
+### Buscar por UF
+GET /api/abates/uf/{uf}
+
+shell
+Copiar código
+
+### Buscar por município
+GET /api/abates/municipio/{municipio}
+
+shell
+Copiar código
+
+### Buscar por categoria
+GET /api/abates/categoria/{categoria}
+
+yaml
+Copiar código
+
+---
+
+# 📊 Consultas Agregadas
+
+### Soma por UF
+GET /api/abates/soma-por-uf
+
+css
+Copiar código
+Retorno:
+```json
+[
+  {"uf": "PB", "total": 12345},
+  {"uf": "SP", "total": 9988}
+]
+Soma por Município
+swift
+Copiar código
+GET /api/abates/soma/municipio
+Soma por Categoria
+swift
+Copiar código
+GET /api/abates/soma/categoria
+Soma por Ano
+swift
+Copiar código
+GET /api/abates/soma/ano
+🎯 Consulta Filtrada (qualquer combinação)
+bash
+Copiar código
+GET /api/abates/soma-filtrada
+Parâmetros opcionais:
+Parâmetro	Tipo	Exemplo
+uf	String	PB
+categoria	String	Bovino
+ano	Int	2020
+mes	Int	5
+
+Exemplo:
+bash
+Copiar código
+GET /api/abates/soma-filtrada?uf=PB&categoria=Bovino&ano=2020
+Retorno:
+
+json
+Copiar código
+{ "total": 812 }
+📥 Importação de CSV via JDBC (Ultra Rápida)
+O serviço CsvImportJdbcService realiza:
+
+Validação linha a linha
+
+Normalização
+
+Inserções em batch
+
+Cache para FK
+
+Transações manuais
+
+Exemplo de uso:
+java
+Copiar código
+csvImportJdbcService.importarCsvJdbc("C:\\dados\\abates.csv");
+🧪 Regras de Validação
+Regra	Classe
+Ano deve ser entre 1900 e 2100	AnoValidoRule
+Mês deve ser entre 1 e 12	MesValidoRule
+UF deve ser válida	UfValidaRule
+Quantidade ≥ 0	QuantidadeValidaRule
+
+As regras são aplicadas no ValidatorEngine.
+
+🗃 Modelo de Banco de Dados
+scss
+Copiar código
+UF (1) ---- (N) Municipio ---- (N) Abate ---- (1) CategoriaAnimal
+📌 Exemplo de Registro no CSV
+yaml
+Copiar código
+ano;mes;uf;municipio;categoria;quantidade
+2020;05;PB;Cajazeiras;Bovino;213
+🧑‍💻 Como Rodar o Projeto
+bash
+Copiar código
+# Clonar repositório
+git clone https://github.com/seuusuario/seu-repo.git
+
+# Entrar na pasta
+cd seu-repo
+
+# Rodar
+mvn spring-boot:run
