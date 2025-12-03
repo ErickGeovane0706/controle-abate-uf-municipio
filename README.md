@@ -18,7 +18,7 @@ Ele combina **JPA/Hibernate**, **JDBC otimizado com batch**, **normalização**,
 
 
 ## 📁 Estrutura do Projeto
----
+```
 src/
 └── main/
     └── java/
@@ -56,7 +56,7 @@ src/
                 ├── ValidationRule.java
                 ├── ValidationConfig.java
                 └── ValidatorEngine.java
-
+```
 
 # 🧩 **Funcionalidades Principais**
 
