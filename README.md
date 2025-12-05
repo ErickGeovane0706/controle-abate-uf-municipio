@@ -109,14 +109,11 @@ GET /api/abates/uf/{uf}
 ### Buscar por município
 GET /api/abates/municipio/{municipio}
 
-shell
-Copiar código
-
 ### Buscar por categoria
 GET /api/abates/categoria/{categoria}
 ---
 
-# 📊 Consultas Agregadas
+### 📊 Consultas Agregadas
 
 ### Soma por UF
 GET /api/abates/soma-por-uf
@@ -168,7 +165,6 @@ Transações manuais
 
 Exemplo de uso:
 java
-Copiar código
 csvImportJdbcService.importarCsvJdbc("C:\\dados\\abates.csv");
 🧪 Regras de Validação
 Regra	Classe
