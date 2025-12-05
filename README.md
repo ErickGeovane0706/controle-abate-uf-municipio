@@ -93,50 +93,55 @@ src/
 
 ## 🔹 **Listar todos os abates**
 GET /api/abates
----
-
 ## 🔹 **Consultas Básicas**
 
 ### Buscar por ano
+---
 GET /api/abates/ano/{ano}
-
+---
 ### Buscar por ano e mês
+---
 GET /api/abates/ano/{ano}/mes/{mes}
-
+---
 ### Buscar por UF
+---
 GET /api/abates/uf/{uf}
-
+---
 ### Buscar por município
+---
 GET /api/abates/municipio/{municipio}
-
+---
 ### Buscar por categoria
+---
 GET /api/abates/categoria/{categoria}
 ---
 
 ### 📊 Consultas Agregadas
 
 ### Soma por UF
+---
 GET /api/abates/soma-por-uf
-
-css
-Copiar código
+---
 Retorno:
 ```json
 [
   {"uf": "PB", "total": 12345},
   {"uf": "SP", "total": 9988}
 ]
-Soma por Município
+### Soma por Município
+---
 GET /api/abates/soma/municipio
-
-Soma por Categoria
+---
+### Soma por Categoria
+---
 GET /api/abates/soma/categoria
-
-Soma por Ano
+---
+### Soma por Ano
+---
 GET /api/abates/soma/ano
-
+---
 🎯 Consulta Filtrada (qualquer combinação)
-
+---
 GET /api/abates/soma-filtrada
 Parâmetros opcionais:
 Parâmetro	Tipo	Exemplo
@@ -147,6 +152,7 @@ mes	Int	5
 
 Exemplo:
 GET /api/abates/soma-filtrada?uf=PB&categoria=Bovino&ano=2020
+---
 Retorno:
 json
 { "total": 812 }
